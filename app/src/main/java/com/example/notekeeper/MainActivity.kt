@@ -34,9 +34,9 @@ class MainActivity : AppCompatActivity() {
             val originalValue = findViewById<TextView>(R.id.textDisplayValue).text.toString().toInt()
             val newValue = 2 * originalValue
             findViewById<TextView>(R.id.textDisplayValue).text = newValue.toString()
-            
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+
+            Snackbar.make(view, "Value $originalValue changed to $newValue", Snackbar.LENGTH_LONG)
+                .show()
         }
     }
 

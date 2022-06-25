@@ -9,6 +9,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.TextView
 import com.example.notekeeper.databinding.ActivityMainBinding
 
@@ -29,15 +31,15 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
+        val dm = DataManager()
+        val adapterCourses = ArrayAdapter<CourseInfo>(this, android.R.layout.simple_spinner_item,
+        dm.courses.values.toList())
 
-            val originalValue = findViewById<TextView>(R.id.textDisplayValue).text.toString().toInt()
-            val newValue = 2 * originalValue
-            findViewById<TextView>(R.id.textDisplayValue).text = newValue.toString()
+        adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-            Snackbar.make(view, "Value $originalValue changed to $newValue", Snackbar.LENGTH_LONG)
-                .show()
-        }
+        findViewById<Spinner>(R.id.spinnerCourses).adapter = adapterCourses
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

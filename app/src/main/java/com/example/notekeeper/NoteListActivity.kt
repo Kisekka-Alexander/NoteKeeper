@@ -33,8 +33,14 @@ class NoteListActivity : AppCompatActivity() {
             val activityIntent = Intent(this, MainActivity::class.java)
             startActivity(activityIntent)
         }
-        findViewById<ListView>(R.id.listNotes).adapter = ArrayAdapter<NoteInfo>(this,android.R.layout.simple_list_item_1,
-        DataManager.notes)
+        findViewById<ListView>(R.id.listNotes).adapter = ArrayAdapter<NoteInfo>(this,
+            android.R.layout.simple_list_item_1, DataManager.notes)
+
+        findViewById<ListView>(R.id.listNotes).setOnItemClickListener {parent, view, position, id ->
+            val activityIntent = Intent(this, MainActivity::class.java)
+            activityIntent.putExtra("EXTRA_NOTE_POSITION", position)
+            startActivity(activityIntent)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

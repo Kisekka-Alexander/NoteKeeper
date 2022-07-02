@@ -38,7 +38,7 @@ class NoteListActivity : AppCompatActivity() {
 
         findViewById<ListView>(R.id.listNotes).setOnItemClickListener {parent, view, position, id ->
             val activityIntent = Intent(this, MainActivity::class.java)
-            activityIntent.putExtra("EXTRA_NOTE_POSITION", position)
+            activityIntent.putExtra(EXTRA_NOTE_POSITION, position)
             startActivity(activityIntent)
         }
     }

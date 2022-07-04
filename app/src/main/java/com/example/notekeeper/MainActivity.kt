@@ -72,6 +72,10 @@ class MainActivity : AppCompatActivity() {
                 moveNext()
                 true
             }
+            R.id.action_previous -> {
+                movePrevious()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -82,15 +86,34 @@ class MainActivity : AppCompatActivity() {
         invalidateOptionsMenu()
     }
 
+    private fun movePrevious(){
+        --notePosition
+        displayNote()
+        invalidateOptionsMenu()
+    }
+
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        if(notePosition>=DataManager.notes.lastIndex){
-            val menuItem = menu?.findItem(R.id.action_next)
+        if(notePosition >= DataManager.notes.lastIndex){
+            val menuItem = menu?.findItem(R.id.action_previous)
+            val menuItemNext = menu?.findItem(R.id.action_next)
 
             if (menuItem != null){
-                menuItem.icon = getDrawable(R.drawable.ic_baseline_forward_24)
-                menuItem.isEnabled = false
+                menuItem.icon = getDrawable(R.drawable.ic_baseline_arrow_left_24)
+                menuItemNext?.isEnabled = false
+                menuItemNext?.isVisible = false
             }
 
+        }
+
+        if(notePosition == 1){
+            val menuItem = menu?.findItem(R.id.action_next)
+            val menuItemPrev = menu?.findItem(R.id.action_previous)
+
+            if (menuItem != null){
+                menuItem.icon = getDrawable(R.drawable.ic_baseline_arrow_right_24)
+                menuItemPrev?.isEnabled = false
+                menuItemPrev?.isVisible = false
+            }
         }
 
         return super.onPrepareOptionsMenu(menu)

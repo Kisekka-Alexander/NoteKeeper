@@ -29,6 +29,14 @@ class FirstFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        // Set title bar
+        (activity as MainActivity?)
+            ?.setActionBarTitle("Edit Note")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

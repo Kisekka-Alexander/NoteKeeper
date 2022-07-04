@@ -32,21 +32,14 @@ class NoteListActivity : AppCompatActivity() {
             val activityIntent = Intent(this, MainActivity::class.java)
             startActivity(activityIntent)
         }
-        findViewById<ListView>(R.id.listNotes).adapter = ArrayAdapter<NoteInfo>(this,
-            android.R.layout.simple_list_item_1, DataManager.notes)
 
-        findViewById<ListView>(R.id.listNotes).setOnItemClickListener {parent, view, position, id ->
-            val activityIntent = Intent(this, MainActivity::class.java)
-            activityIntent.putExtra(NOTE_POSITION, position)
-            startActivity(activityIntent)
-        }
     }
     fun setActionBarTitle(title: String?) {
         supportActionBar!!.title = title
     }
     override fun onResume() {
         super.onResume()
-        (findViewById<ListView>(R.id.listNotes).adapter as ArrayAdapter<NoteInfo>).notifyDataSetChanged()
+
     }
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_note_list)

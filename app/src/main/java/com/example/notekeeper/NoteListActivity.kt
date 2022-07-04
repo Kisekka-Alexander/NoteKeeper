@@ -42,6 +42,9 @@ class NoteListActivity : AppCompatActivity() {
             startActivity(activityIntent)
         }
     }
+    fun setActionBarTitle(title: String?) {
+        supportActionBar!!.title = title
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_note_list)

@@ -91,7 +91,9 @@ class MainActivity : AppCompatActivity() {
         displayNote()
         invalidateOptionsMenu()
     }
-
+    fun setActionBarTitle(title: String?) {
+        supportActionBar!!.title = title
+    }
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         if(notePosition >= DataManager.notes.lastIndex){
             val menuItem = menu?.findItem(R.id.action_previous)

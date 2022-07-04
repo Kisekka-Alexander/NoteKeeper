@@ -29,6 +29,13 @@ class First2Fragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        // Set title bar
+        (activity as NoteListActivity?)
+            ?.setActionBarTitle("Note List")
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

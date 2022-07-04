@@ -1,7 +1,6 @@
 package com.example.notekeeper
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,7 +11,6 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
-import android.widget.TextView
 import com.example.notekeeper.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -41,10 +39,21 @@ class MainActivity : AppCompatActivity() {
         adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         findViewById<Spinner>(R.id.spinnerCourses).adapter = adapterCourses
 
-        notePosition = intent.getIntExtra(EXTRA_NOTE_POSITION, POSITION_NOT_SET)
+        notePosition = savedInstanceState?.getInt(NOTE_POSITION, POSITION_NOT_SET)?:
+            intent.getIntExtra(NOTE_POSITION, POSITION_NOT_SET)
         if(notePosition != POSITION_NOT_SET)
             displayNote()
 
+        else{
+            DataManager.notes.add(NoteInfo())
+            notePosition = DataManager.notes.lastIndex
+        }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState?.putInt(NOTE_POSITION, notePosition)
     }
 
     private fun displayNote() {
@@ -119,6 +128,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveNote()
+    }
+
+    private fun saveNote() {
+        val note = DataManager.notes[notePosition]
+        note.title = findViewById<EditText>(R.id.textNoteTitle).text.toString()
+        note.text = findViewById<EditText>(R.id.textNoteText).text.toString()
+        note.course = findViewById<Spinner>(R.id.spinnerCourses).selectedItem as CourseInfo
     }
 
     override fun onSupportNavigateUp(): Boolean {

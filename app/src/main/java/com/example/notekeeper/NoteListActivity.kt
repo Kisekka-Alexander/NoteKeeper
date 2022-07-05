@@ -9,6 +9,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.notekeeper.databinding.ActivityNoteListBinding
 
 class NoteListActivity : AppCompatActivity() {
@@ -32,6 +34,8 @@ class NoteListActivity : AppCompatActivity() {
             val activityIntent = Intent(this, MainActivity::class.java)
             startActivity(activityIntent)
         }
+
+        findViewById<RecyclerView>(R.id.listItems).layoutManager = LinearLayoutManager(this)
 
     }
     fun setActionBarTitle(title: String?) {

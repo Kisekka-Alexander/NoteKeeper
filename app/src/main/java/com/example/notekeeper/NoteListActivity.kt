@@ -36,6 +36,7 @@ class NoteListActivity : AppCompatActivity() {
         }
 
         findViewById<RecyclerView>(R.id.listItems).layoutManager = LinearLayoutManager(this)
+        findViewById<RecyclerView>(R.id.listItems).adapter = NoteRecyclerAdapter(this, DataManager.notes)
 
     }
     fun setActionBarTitle(title: String?) {

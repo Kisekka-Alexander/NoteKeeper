@@ -28,7 +28,6 @@ class NoteRecyclerAdapter(private val context: Context, private val notes: List<
         holder.textCourse?.text = note.title
     }
 
-    override fun getItemCount(): Int {
-        return notes.size
-    }
+    override fun getItemCount()=notes.size
+
 }
